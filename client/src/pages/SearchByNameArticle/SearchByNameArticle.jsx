@@ -29,7 +29,6 @@ export default function SearchByNameArticle() {
   };
 
   useEffect(() => {
-    // Reset search results and loaded state when search term changes
     setSearchResults([]);
     setLoaded(false);
   }, [searchTerm]);
