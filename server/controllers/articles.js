@@ -54,6 +54,7 @@ exports.updateArticle = async (req, res) => {
       body2: req.body.body2,
       reference: req.body.reference,
       author: req.body.author,
+      date: req.body.date
     };
     const result = await Article.findByIdAndUpdate(req.params.id, data);
     if (result) {
@@ -80,6 +81,7 @@ exports.createArticle = async (req, res) => {
       body2: req.body.body2,
       reference: req.body.reference,
       author: req.body.author,
+      date: req.body.date
     });
     const result = await data.save();
     if (result) {
