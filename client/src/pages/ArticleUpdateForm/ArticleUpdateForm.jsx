@@ -20,13 +20,21 @@ export default function ArticleUpdateForm() {
   };
 
   const postForm = async () => {
-    const article = await updateArticle(id, formData);
-    if (article.status === 200) {
-      navigate(`/article/${id}`);
-    } else {
-      setInfo(article.msg);
+    try {
+      const updatedFormData = { ...formData, date: new Date().toISOString() };
+      console.log("Form data before sending:", updatedFormData);
+      const article = await updateArticle(id, updatedFormData);
+      if (article.status === 200) {
+        navigate(`/article/${id}`);
+      } else {
+        setInfo(article.msg);
+      }
+    } catch (error) {
+      console.error("Error updating article:", error);
+      setInfo("Failed to update article");
     }
   };
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
