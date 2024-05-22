@@ -1,52 +1,66 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-const cors = require("cors");
+const express = require("express");
+const app = express();
 const mongoose = require("mongoose");
-mongoose
-  .connect(
-    
-  )
-  .then(() => console.log("Database connected"))
-  .catch((err) => console.log(err));
 
-var indexRouter = require("./routes/index");
+const PORT = 3000;
+
+mongoose.connect("mongodb+srv://admin:admin@cluster0.ku1phhc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
+
+const db = mongoose.connection;
+
+db.on("error", console.error.bind(console, ":( Something went wrong: "));
+db.once("open", function() {
+  console.log("Connected to the DB! :D");
+});
+
+var testRouter = require("./routes/Test");
 var articlesRouter = require("./routes/articles");
 
-
-var app = express();
-
-// view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
-
-app.use(logger("dev"));
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
-
-app.use("/", indexRouter);
+app.use("/", testRouter);
 app.use("/articles", articlesRouter);
 
-
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
+app.listen(PORT, () => {
+  console.log("It works! :D");
 });
 
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+// REQUESTS
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render("error");
+/*const http = require("http");
+
+const getOptions = {
+  hostname: "localhost",
+  port: PORT,
+  path: "/",
+  method: "GET"
+};
+
+const req = http.request(getOptions, res => {
+  res.on("data", d => {
+    process.stdout.write(d);
+  });
 });
 
-module.exports = app;
+req.on("error", error => {
+  console.error(error);
+});
+
+req.end();
+
+const putOptions = {
+  hostname: "localhost",
+  port: PORT,
+  path: "/",
+  method: "PUT"
+};
+
+const reqPut = http.request(putOptions, res => {
+  res.on("data", d => {
+    process.stdout.write(d);
+  });
+});
+
+reqPut.on("error", error => {
+  console.error(error);
+});
+
+reqPut.end();*/

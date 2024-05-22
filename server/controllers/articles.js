@@ -1,51 +1,81 @@
-const Article = require("../models/articles");
+//const Article = require("../models/articles");
+
+// For the time being the controllers won't work as they should
+// They will be just working in a sense that they will
+// responed but won't return anything useful
 
 exports.getAllArticles = async (req, res) => {
+
   try {
-    const result = await Article.find();
-    if (result && result.length !== 0) {
+
+    const result = {}; //await Article.find();
+
+    if (true/*result && result.length !== 0*/) {
+
       return res.status(200).send({
         msg: "Articles found!",
         payload: result,
       });
     }
+
     res.status(404).send({ msg: "Articles not found" });
+
   } catch (error) {
+
     res.status(500).send(error);
+
   }
 };
 
 exports.getArticlesById = async (req, res) => {
+
   try {
-    const result = await Article.findById(req.params.id);
-    if (result) {
+
+    const result = {};//await Article.findById(req.params.id);
+
+    if (true/*result*/) {
+
       return res.status(200).send({
         msg: "Article found",
         payload: result,
       });
     }
+
     res.status(404).send({ msg: "Article not found" });
+
   } catch (error) {
+
     res.status(500).send(error);
+
   }
 };
 
 exports.deleteArticle = async (req, res) => {
+
   try {
-    const result = await Article.findByIdAndDelete(req.params.id);
+
+    const result = {};//await Article.findByIdAndDelete(req.params.id);
+
     if (result) {
+
       return res.status(200).send({
         msg: "Article deleted",
       });
     }
+
     res.status(500).send({ msg: "Something went wrong" });
+
   } catch (error) {
+
     res.status(500).send(error);
+
   }
 };
 
 exports.updateArticle = async (req, res) => {
+
   try {
+
     const data = {
       name: req.body.name,
       heading: req.body.heading,
@@ -56,23 +86,30 @@ exports.updateArticle = async (req, res) => {
       author: req.body.author,
       date: req.body.date
     };
-    const result = await Article.findByIdAndUpdate(req.params.id, data);
+
+    const result = {};/*await Article.findByIdAndUpdate(req.params.id, data);*/
+
     if (result) {
+
       return res.status(200).send({
         msg: "Article updated",
         payload: result,
       });
     }
-    res.status(500).send({
-      msg: "Article was not updated",
-    });
+
+    res.status(500).send({ msg: "Article was not updated", });
+
   } catch (error) {
+
     res.status(500).send(error);
+
   }
 };
 
 exports.createArticle = async (req, res) => {
+
   try {
+
     const data = new Article({
       name: req.body.name,
       heading: req.body.heading,
@@ -83,33 +120,42 @@ exports.createArticle = async (req, res) => {
       author: req.body.author,
       date: req.body.date
     });
-    const result = await data.save();
+
+    const result = {}//await data.save();
+
     if (result) {
+
       return res.status(201).send({
         msg: "Article created",
         payload: result,
       });
     }
-    res.status(500).send({
-      msg: "Article was not created",
-    });
+
+    res.status(500).send({ msg: "Article was not created" });
+
   } catch (error) {
+
     res.status(500).send(error);
+
   }
 };
 
 exports.searchArticlesByName = async (req, res) => {
+
   try {
-    const name = req.query.name;
-    const result = await Article.find({ name: { $regex: `.*${name}.*`, $options: "i" } }, 'name'); // Pouze vyhledávání podle jména a vrácení pouze jména
+
+    //const name = req.query.name;
+
+    const result = {};//await Article.find({ name: { $regex: `.*${name}.*`, $options: "i" } }, 'name'); // Pouze vyhledávání podle jména a vrácení pouze jména
+
     res.status(200).send({
       msg: "Articles found by name",
       payload: result,
     });
+
   } catch (error) {
-    res.status(500).send({
-      msg: "Error while searching articles by name",
-      error: error,
-    });
+
+    res.status(500).send({ msg: "Error while searching articles by name", error: error, });
+
   }
 };
