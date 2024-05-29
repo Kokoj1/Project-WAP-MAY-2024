@@ -5,7 +5,7 @@ const articlesController = require("../controllers/articles");
 
 router.get("/", articlesController.getAllArticles);
 
-router.get("/:id", articlesController.getArticlesById);
+router.get("/:id", articlesController.getArticleById);
 
 router.delete("/:id", articlesController.deleteArticle);
 
