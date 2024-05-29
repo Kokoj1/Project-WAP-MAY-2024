@@ -1,24 +1,21 @@
-//const Article = require("../models/articles");
-
-// For the time being the controllers won't work as they should
-// They will be just working in a sense that they will
-// responed but won't return anything useful
+const mongoose = require("mongoose");
+const article = require("../models/article");
 
 exports.getAllArticles = async (req, res) => {
 
   try {
 
-    const result = {}; //await Article.find();
+    const result = await article.find();
 
-    if (true/*result && result.length !== 0*/) {
+    if (result) {
 
       return res.status(200).send({
-        msg: "Articles found!",
+        msg: "Articles successfully retrieved!",
         payload: result,
       });
     }
 
-    res.status(404).send({ msg: "Articles not found" });
+    res.status(404).send({ msg: "Articles couldn't be retrived!" });
 
   } catch (error) {
 
@@ -27,21 +24,21 @@ exports.getAllArticles = async (req, res) => {
   }
 };
 
-exports.getArticlesById = async (req, res) => {
+exports.getArticleById = async (req, res) => {
 
   try {
 
-    const result = {};//await Article.findById(req.params.id);
+    const result = await article.findById(new mongoose.Types.ObjectId(req.params.id));
 
-    if (true/*result*/) {
+    if (result) {
 
       return res.status(200).send({
-        msg: "Article found",
+        msg: "Article found!",
         payload: result,
       });
     }
 
-    res.status(404).send({ msg: "Article not found" });
+    res.status(404).send({ msg: `Article with ID ${req.params.id} cannot be found!` });
 
   } catch (error) {
 
@@ -54,16 +51,16 @@ exports.deleteArticle = async (req, res) => {
 
   try {
 
-    const result = {};//await Article.findByIdAndDelete(req.params.id);
+    const result = await article.findByIdAndDelete(new mongoose.Types.ObjectId(req.params.id));
 
     if (result) {
 
       return res.status(200).send({
-        msg: "Article deleted",
+        msg: "Article successfully deleted"
       });
     }
 
-    res.status(500).send({ msg: "Something went wrong" });
+    res.status(500).send({ msg: "Something went wrong, are you sure the ID is correct?" });
 
   } catch (error) {
 
@@ -76,18 +73,7 @@ exports.updateArticle = async (req, res) => {
 
   try {
 
-    const data = {
-      name: req.body.name,
-      heading: req.body.heading,
-      body: req.body.body,
-      heading2: req.body.heading2,
-      body2: req.body.body2,
-      reference: req.body.reference,
-      author: req.body.author,
-      date: req.body.date
-    };
-
-    const result = {};/*await Article.findByIdAndUpdate(req.params.id, data);*/
+    const result = await article.findByIdAndUpdate(new mongoose.Types.ObjectId(req.params.id), req.body);
 
     if (result) {
 
@@ -97,7 +83,7 @@ exports.updateArticle = async (req, res) => {
       });
     }
 
-    res.status(500).send({ msg: "Article was not updated", });
+    res.status(500).send({ msg: "Something went wrong! Article wasn't updated. Check the ID and the stuff you want to update." });
 
   } catch (error) {
 
@@ -110,28 +96,28 @@ exports.createArticle = async (req, res) => {
 
   try {
 
-    const data = new Article({
-      name: req.body.name,
-      heading: req.body.heading,
-      body: req.body.body,
-      heading2: req.body.heading2,
-      body2: req.body.body2,
-      reference: req.body.reference,
-      author: req.body.author,
-      date: req.body.date
+    const body = req.body;
+
+    const newArticle = new article({
+
+      title: body.title,
+      content: body.content
+
     });
 
-    const result = {}//await data.save();
+    const result = await newArticle.save();
+
+    console.log(`The ID of the new document is: ${result._id}`);
 
     if (result) {
 
       return res.status(201).send({
         msg: "Article created",
-        payload: result,
+        payload: result
       });
     }
 
-    res.status(500).send({ msg: "Article was not created" });
+    res.status(500).send({ msg: "Couldn't create article!" });
 
   } catch (error) {
 
@@ -139,6 +125,8 @@ exports.createArticle = async (req, res) => {
 
   }
 };
+
+// Will rework later
 
 exports.searchArticlesByName = async (req, res) => {
 
