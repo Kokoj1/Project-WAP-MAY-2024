@@ -20,12 +20,10 @@ db.once("open", function() {
   console.log("Connected to the DB! :D");
 });
 
-var testRouter = require("./routes/Test");
 var articlesRouter = require("./routes/articles");
 
 // ENDPOINTS
 
-app.use("/", testRouter);
 app.use("/articles", articlesRouter);
 
 app.listen(PORT, () => {
