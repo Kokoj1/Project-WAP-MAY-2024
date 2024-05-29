@@ -11,7 +11,7 @@ exports.getAllArticles = async (req, res) => {
 
       return res.status(200).send({
         msg: "Articles successfully retrieved!",
-        payload: result,
+        payload: result
       });
     }
 
@@ -34,7 +34,7 @@ exports.getArticleById = async (req, res) => {
 
       return res.status(200).send({
         msg: "Article found!",
-        payload: result,
+        payload: result
       });
     }
 

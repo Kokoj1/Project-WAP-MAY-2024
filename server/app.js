@@ -34,41 +34,41 @@ app.listen(PORT, () => {
 
 /*
 
-// REQUESTS EXAMPLE
+// REQUEST EXAMPLES
 
 // CREATE
 
 const formData = {
 
-	title: "TEST",
-	content: "TEST"
+  title: "TEST",
+  content: "TEST"
 
 };
 
 const res = await fetch(`http://localhost:3000/articles`, {
 
-	headers: {
-		"Accept": "application/json",
-		"Content-Type": "application/json",
-	},
-	"method": "POST",
-	"body": JSON.stringify(formData),
+  headers: {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+  },
+  "method": "POST",
+  "body": JSON.stringify(formData)
 });
 
 const data = await res.json();
 
 console.log("--- REPORT ---");
-console.log(`PLAYLOAD: ${JSON.stringify(data.payload)}`);
+console.log(`PAYLOAD: ${JSON.stringify(data.payload)}`);
 console.log(`MSG     : ${data.msg}`);
 
 // GET ALL
 
 const req = await fetch("http://localhost:3000/articles", {
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
-    },
-    "method": "GET",
+  headers: {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+  },
+  "method": "GET"
 });
 
 const data = await req.json();
@@ -79,12 +79,12 @@ console.log(`MSG    : ${data.msg}`);
 
 // GET ARTICLE
 
-const req = await fetch("http://localhost:3000/articles/665701e52f24c2fce33aef68", {
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
-    },
-    "method": "GET"
+const req = await fetch("http://localhost:3000/articles/ID", {
+  headers: {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+  },
+  "method": "GET"
 });
 
 const data = await req.json();
@@ -95,12 +95,12 @@ console.log(`MSG    : ${data.msg}`);
 
 // DELETE
 
-const req = await fetch("http://localhost:3000/articles/665726ece1f7fdbd62b574cb", {
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
-    },
-    "method": "DELETE"
+const req = await fetch("http://localhost:3000/articles/ID", {
+  headers: {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+  },
+  "method": "DELETE"
 });
 
 const data = await req.json();
@@ -112,18 +112,18 @@ console.log(`MSG    : ${data.msg}`);
 
 const formData = {
 
-	content: "Lorem ipsum"
+  title: "Updated title",
+  content: "Updated content"
 
 };
 
 const res = await fetch(`http://localhost:3000/articles/665701e52f24c2fce33aef68`, {
-
-	"headers": {
-		"Accept": "application/json",
-		"Content-Type": "application/json",
-	},
-	"method": "PUT",
-	"body": JSON.stringify(formData),
+  "headers": {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+  },
+  "method": "PUT",
+  "body": JSON.stringify(formData)
 });
 
 const data = await res.json();
