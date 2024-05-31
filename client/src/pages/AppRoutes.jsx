@@ -1,29 +1,34 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import MainPage from "./MainPage/MainPage";
-import About from "./About/About";
-import ArticleCreateForm from "./ArticleCreateForm/ArticleCreateForm";
-import ArticleUpdateForm from "./ArticleUpdateForm/ArticleUpdateForm";
-import ArticleView from "./ArticleView/ArticleView";
-import ArticleList from "./ArticleList/ArticleList";
-import CreatedArticle from "./ArticleCreateForm/CreatedArticle";
-import SearchByNameArticle from "./SearchByNameArticle/SearchByNameArticle";
+// REACT ROUTER
 
-export default function AppRoutes() {
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+// ENDPOINTS
+
+import ArticlesList from "./ArticlesList/ArticlesList";
+import SearchResults from "./SearchResults/SearchResults";
+import Article from "./Article/Article";
+import Edit from "./Edit/Edit";
+import Delete from "./Delete/Delete";
+import Create from "./Create/Create";
+
+// CODE \\
+
+export default function() {
+
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/createarticle" element={<ArticleCreateForm />} />
-          <Route path="/updatearticle/:id" element={<ArticleUpdateForm />} />
-          <Route path="/article/:id" element={<ArticleView />} />
-          <Route path="/articles" element={<ArticleList />} />
-          <Route path="/createdarticle/:id" element={<CreatedArticle />} />
-          <Route path="/search" element={<SearchByNameArticle />} /> {/* Přidáme cestu pro vyhledávání */}
-        </Routes>
-      </BrowserRouter>
-    </>
+
+    <BrowserRouter>
+      <Routes>
+
+        <Route path="/" element={<ArticlesList />} />
+        <Route path="/searchresults/:query" element={<SearchResults />} />
+        <Route path="/article/:id" element={<Article />} />
+        <Route path="/edit/:id" element={<Edit />} />
+        <Route path="/delete/:id" element={<Delete />} />
+        <Route path="/create" element={<Create />} />
+
+      </Routes>
+    </BrowserRouter>
+
   );
 }

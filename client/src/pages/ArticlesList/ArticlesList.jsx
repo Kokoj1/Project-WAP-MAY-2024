@@ -1,14 +1,18 @@
-import { Link } from "react-router-dom";
-import ArticleLink from "./ArticleLink";
 import { useState, useEffect } from "react";
-import { getArticles } from "../../models/Article";
+import { getArticles } from "../../models/Articles";
+import { Link } from "react-router-dom";
 
-export default function ArticleList() {
-  const [articles, setArticles] = useState();
+import ArticleLink from "../../components/ArticleLink";
+
+export default function() {
+
+  const [articles, setArticles] = useState("");
   const [isLoaded, setLoaded] = useState(false);
 
   const load = async () => {
+
     const data = await getArticles();
+
     if (data.status === 500 || data.status === 404) return setLoaded(null);
     if (data.status === 200) {
       setArticles(data.payload);
@@ -23,9 +27,9 @@ export default function ArticleList() {
   if (isLoaded === null) {
     return (
       <>
-        <p>Articles not found</p>
+        <p>Well that's not supposed to happen</p>
       </>
-    )
+    );
   }
 
   if (!isLoaded) {
@@ -33,20 +37,17 @@ export default function ArticleList() {
       <>
         <p>Articles are loading...</p>
       </>
-    )
+    );
   }
 
   return (
     <>
-      <h1>Article list</h1>
+      <Link to="/create"><p>Create article</p></Link>
       {
-        articles.map((article, index) => (
-          <ArticleLink key={index} {...article} />
-        ))
+        articles.map((article, index) => {
+          return (<ArticleLink key={index} article={article} />);
+        })
       }
-      <Link to={"/"}>
-        <p>Go back</p>
-      </Link>
     </>
   );
 }
