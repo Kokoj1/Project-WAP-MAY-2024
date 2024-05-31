@@ -5,7 +5,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // ENDPOINTS
 
 import ArticlesList from "./ArticlesList/ArticlesList";
-import SearchResults from "./SearchResults/SearchResults";
 import Article from "./Article/Article";
 import Edit from "./Edit/Edit";
 import Delete from "./Delete/Delete";
@@ -21,7 +20,6 @@ export default function() {
       <Routes>
 
         <Route path="/" element={<ArticlesList />} />
-        <Route path="/searchresults/:query" element={<SearchResults />} />
         <Route path="/article/:id" element={<Article />} />
         <Route path="/edit/:id" element={<Edit />} />
         <Route path="/delete/:id" element={<Delete />} />
