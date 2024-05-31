@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 import { getArticle } from "./../../models/Articles";
 
 export default function() {
@@ -43,10 +47,17 @@ export default function() {
   
   return (
     <>
-      <Link to="/"><p>Back</p></Link>
-      <Link to={`/edit/${id}`}><p>Edit</p></Link>
-      <Link to={`/delete/${id}`}><p>Delete</p></Link>
-      <h1>{article.title}</h1>
+      <h1 className="mt-3">{article.title}</h1>
+        <Container style={{ "marginRight": "0px" }}>
+          <Row className="justify-content-end">
+            <Col className="col-auto">
+              <a href={`/edit/${id}`}>Edit</a>
+            </Col>
+            <Col className="col-auto">
+              <a href={`/delete/${id}`}>Delete</a>
+            </Col>
+          </Row>
+        </Container>
       <div dangerouslySetInnerHTML={{__html: article.content}} />
     </>
   );

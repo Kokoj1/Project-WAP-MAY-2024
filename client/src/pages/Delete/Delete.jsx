@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { deleteArticle } from "../../models/Articles";
+import Button from "react-bootstrap/Button";
 
 export default function() {
 
@@ -26,10 +27,17 @@ export default function() {
     deleteHandle();
   }, []);
 
+  const handleClick = () => {
+    window.location = "/";
+  }
+
   if (isLoaded === null) {
     return (
       <>
-        <p>Well that's not supposed to happen</p>
+        <div className="text-center">
+          <p className="mt-3">Well that's not supposed to happen</p>
+          <Button className="btn-lg" variant="primary" type="submit" onClick={handleClick}>Back</Button>
+        </div>
       </>
     );
   }
@@ -37,15 +45,19 @@ export default function() {
   if (!isLoaded) {
     return (
       <>
-        <p>Trying to delete article, please don't leave</p>
+        <div className="text-center">
+          <p className="mt-3">Trying to delete article, please don't leave</p>
+        </div>
       </>
     );
   }
 
   return (
     <>
-      <Link to="/"><p>Back</p></Link>
-      <p>Article successfully deleted, you may now return</p>
+      <div className="text-center">
+         <p className="mt-3">Article successfully deleted, you may now return</p>
+         <Button className="btn-lg" variant="primary" type="submit" onClick={handleClick}>Back</Button>
+      </div>
     </>
   );
 }

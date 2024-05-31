@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { getArticles } from "../../models/Articles";
 import { Link } from "react-router-dom";
 
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+
 import ArticleLink from "../../components/ArticleLink";
 
 export default function() {
@@ -41,13 +44,20 @@ export default function() {
   }
 
   return (
-    <>
-      <Link to="/create"><p>Create article</p></Link>
+    <div style={{display: "flex", "flexDirection": "column"}}>      
       {
         articles.map((article, index) => {
-          return (<ArticleLink key={index} article={article} />);
+          return (
+            <Card className="m-2" style={{ width: "98%" }} key={index}>
+              <Card.Body>
+                <Card.Title>{article.title}</Card.Title>
+                <Card.Text>{article.content.replace(/<[^>]*>/g, "").slice(0, 40) + (article.content.replace(/<[^>]*>/g, "").slice(0, 40).length >= 40 ? "..." : "")}</Card.Text>
+                <Button className="btn" variant="primary" onClick={() => {window.location = `/article/${article._id}`;}}>Visit</Button>
+             </Card.Body>
+           </Card>
+         );
         })
       }
-    </>
+    </div>
   );
 }

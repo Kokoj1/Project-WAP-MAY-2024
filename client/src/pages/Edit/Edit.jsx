@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { getArticle, updateArticle } from "./../../models/Articles";
+
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 export default function() {
 
@@ -56,17 +62,14 @@ export default function() {
   }
 
   const handleSubmit = () => {
-    let status = document.getElementById("status");
-    status.innerHTML = "Status: Updating...";
     updateArticle(id, {
       content: inputMarkup
     });
-    status.innerHTML = "Status: Success!";
+     window.location = `/article/${id}`
   }
 
   return (
     <>
-      <Link to={`/article/${id}`}><p>Back</p></Link>
       <h3>How to edit?</h3>
       <ol>
         <li>Click on copy</li>
@@ -76,12 +79,30 @@ export default function() {
         <li>Click on preview</li>
         <li>If you are satisfied click on submit</li>
       </ol>
-      <button onClick={handleCopy}>Copy</button><br />
-      <input type="text" onChange={handleChange} placeholder="Paste your HTML here"></input><br />
-      <button onClick={handlePreview}>Preview</button><br />
-      <button onClick={handleSubmit}>Submit</button>
-      <p id="status">Status: None</p>
+      
+      <Container className="text-center">
+        <Row><Button onClick={handleCopy}>Copy</Button></Row>
+      </Container>
+
+      <Container className="pt-3">
+        <Row>
+          <Col>
+            <Form>
+              <Form.Group className="mb-3">
+                <Form.Control type="text" name="title" placeholder="Paste your HTML here" onChange={handleChange}/>
+              </Form.Group>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
+
+      <Container className="text-center">
+        <Row><Button onClick={handlePreview}>Preview</Button></Row>
+        <Row><Button onClick={handleSubmit}>Submit</Button></Row>
+      </Container>
+
       <h2>Preview</h2>
+      <hr />
       <div id="preview" dangerouslySetInnerHTML={{__html: markup}} />
     </>
   );
