@@ -1,4 +1,4 @@
-## Jak proejkt spustit
+## Jak projekt spustit
 
 Ve projektu se nacházi soubour jménem → → **.start.bat** ← ← ten pouze stačí spustit a vše se udělá za vás. Vysokčí na vás 3 okna a poté se vám otevře prohlížeč nepropadejte panice malware to není toto je úmyslné chování dávkového souboru.
 
