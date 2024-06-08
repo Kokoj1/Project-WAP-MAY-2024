@@ -20,11 +20,13 @@ db.once("open", function() {
   console.log("Connected to the DB! :D");
 });
 
-var articlesRouter = require("./routes/articles");
-
 // ENDPOINTS
 
+var articlesRouter = require("./routes/articles");
+var imagesRouter = require("./routes/images");
+
 app.use("/articles", articlesRouter);
+app.use("/images", imagesRouter);
 
 app.listen(PORT, () => {
   console.log("It works! :D");

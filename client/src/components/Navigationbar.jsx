@@ -12,7 +12,9 @@ export default function() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/create">Create</Nav.Link>
+            <Nav.Link href="/create">Create article</Nav.Link>
+            <Nav.Link href="/images">Images</Nav.Link>
+            <Nav.Link href="/image">Create image</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

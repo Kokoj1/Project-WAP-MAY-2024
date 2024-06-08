@@ -65,7 +65,7 @@ export default function() {
     updateArticle(id, {
       content: inputMarkup
     });
-     window.location = `/article/${id}`
+    window.location = `/article/${id}`
   }
 
   return (
