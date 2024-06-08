@@ -1,18 +1,5 @@
-## → → PROJEKT SI STÁHNĚTE NA PLOCHU ← ←
+## Jak proejkt spustit
 
-Jak projekt spustit:
+Ve projektu se nacházi soubour jménem → → **.start.bat** ← ← ten pouze stačí spustit a vše se udělá za vás. Vysokčí na vás 3 okna a poté se vám otevře prohlížeč nepropadejte panice malware to není toto je úmyslné chování dávkového souboru.
 
-Otevřte si 2 příkázové řádky, jeden bude sloužit jako klient a druhý jako server.
-
-Poté do jednoho napište následující příkaz:
-```batch
-cd "C:\Users\%USERNAME%\Desktop\Project-WAP-MAY-2024\client" && npm run dev
-```
-A do druhého tento:
-```batch
-cd "C:\Users\%USERNAME%\Desktop\Project-WAP-MAY-2024\server" && npm start
-```
-Pokuď příkaz výše vyhodí chybu tak to nevadí jenom to znamená že nemáte nainstalovaný nodemon, proto použite tento příkaz:
-```batch
-cd "C:\Users\%USERNAME%\Desktop\Project-WAP-MAY-2024\server" && node app.js
-```
+Jsem si vědom že v momentálně nejsou všechny případy oštřeny to se ovšem v budoucnu změní.
