@@ -6,8 +6,6 @@ const path = require("path");
 
 exports.getAllImages = async (req, res) => {
 
-  console.log("Get all");
-
   try {
 
     const result = await image.find();
@@ -34,8 +32,6 @@ exports.fetchImage = async (req, res) => {
   try {
 
     const result = await image.findById(new mongoose.Types.ObjectId(req.params.id));
-
-    console.log(result.img.data);
 
     if (result) {
 
@@ -93,7 +89,42 @@ exports.deleteImage = async (req, res) => {
 };
 
 exports.updateImage = async (req, res) => {
-  console.log("Update image");
+
+  console.log("update");
+
+  try {
+
+    let formData = {...req.body}
+
+    console.log(req.file);
+    console.log(formData);
+
+    if (req.file) {
+      const data = await fileStream.promises.readFile(path.join(__dirname, "../uploads", req.file.filename));
+      formData = {...formData, img: {
+        data: data.toString("base64"),
+        contentType: req.file.mimetype
+      }};
+    }
+
+    console.log(formData);
+
+    const result = await image.findByIdAndUpdate(new mongoose.Types.ObjectId(req.params.id), formData);
+
+    if (result) {
+
+      return res.status(200).send({
+        msg: "Image updated",
+        payload: result,
+      });
+    }
+
+    res.status(500).send({ msg: "Something went wrong! Image wasn't updated. Check the ID and the stuff you want to update." });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Oh noes. Something went wrong while updating the file.");
+  }
 };
 
 exports.createImage = async (req, res, next) => {
@@ -131,7 +162,6 @@ exports.createImage = async (req, res, next) => {
     return res.status(500).send({msg: "Couldn't save the image"});
 
   } catch (err) {
-    console.log(err);
     res.status(500).send("Oh noes. Something went wrong while processing the file.");
   }
 }

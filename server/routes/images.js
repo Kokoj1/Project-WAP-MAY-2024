@@ -14,7 +14,7 @@ router.get("/:id/:view", imagesController.getImageById);
 
 router.delete("/:id", imagesController.deleteImage);
 
-router.put("/:id", imagesController.updateImage);
+router.put("/:id", upload.single("image"), imagesController.updateImage);
 
 router.post("/", upload.single("image"), imagesController.createImage);
 

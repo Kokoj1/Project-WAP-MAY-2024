@@ -58,6 +58,7 @@ export default function() {
             </Col>
           </Row>
         </Container>
+        <hr style={{"margin-top": "0px", "margin-bottom": "8px"}}/>
       <div dangerouslySetInnerHTML={{__html: article.content}} />
     </>
   );

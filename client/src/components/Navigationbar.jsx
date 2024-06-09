@@ -14,7 +14,7 @@ export default function() {
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/create">Create article</Nav.Link>
             <Nav.Link href="/images">Images</Nav.Link>
-            <Nav.Link href="/image">Create image</Nav.Link>
+            <Nav.Link href="/image">Upload image</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

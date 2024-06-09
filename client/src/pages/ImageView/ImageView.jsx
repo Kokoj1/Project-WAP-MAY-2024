@@ -55,6 +55,9 @@ export default function() {
       <Container style={{ "marginRight": "0px" }}>
           <Row className="justify-content-end">
             <Col className="col-auto">
+              <a href="#" onClick={e => {navigator.clipboard.writeText(`http://localhost:3000/images/${id}`)}}>Copy link</a>
+            </Col>
+            <Col className="col-auto">
               <a href={`/image/edit/${id}`}>Edit</a>
             </Col>
             <Col className="col-auto">
@@ -62,9 +65,15 @@ export default function() {
             </Col>
           </Row>
         </Container>
+      <h3 style={{ margin: 0 }}>Description</h3>
+      <hr style={{"marginTop": "2px", "marginBottom": "8px"}}/>
       <p>{image.description}</p>
+      <h3 style={{ margin: 0 }}>Licensing</h3>
+      <hr style={{"marginTop": "2px", "marginBottom": "8px"}}/>
       <p>{image.copyright}</p>
-      <img src={`http://localhost:3000/images/${id}`} alt="Failed to load"/>
+      <h3 style={{ margin: 0 }}>Image</h3>
+      <hr style={{"marginTop": "2px", "marginBottom": "8px"}}/>
+      <img style={{ margin: "auto", display: "block", "marginTop": "20px" }} src={`http://localhost:3000/images/${id}`} alt="Failed to load"/>
     </>
   );
 }

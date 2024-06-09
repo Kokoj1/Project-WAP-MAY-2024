@@ -47,7 +47,7 @@ export default function() {
       {
         articles.map((article, index) => {
           return (
-            <Card className="m-2" style={{ width: "98%" }} key={index}>
+            <Card className="m-2" key={index}>
               <Card.Body>
                 <Card.Title>{article.title}</Card.Title>
                 <Card.Text>{article.content.replace(/<[^>]*>/g, "").slice(0, 40) + (article.content.replace(/<[^>]*>/g, "").slice(0, 40).length >= 40 ? "..." : "")}</Card.Text>

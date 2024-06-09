@@ -38,8 +38,6 @@ export const getImage = async (id, view) => {
 
 export const uploadImage = async (formData) => {
 
-  console.log(formData);
-
   /* ARTICLE MODEL
 
     name        => Image name
@@ -60,8 +58,28 @@ export const uploadImage = async (formData) => {
 
   */
 
+  console.log(formData);
+
   const req = await fetch(`http://localhost:3000/images`, {
     "method": "POST",
+    "body": formData
+  });
+
+  const data = await req.json();
+
+  return {
+    status: req.status,
+    payload: data.payload,
+    msg: data.msg
+  };
+}
+
+export const updateImage = async (id, formData) => {
+
+  console.log(formData);
+
+  const req = await fetch(`http://localhost:3000/images/${id}`, {
+    "method": "PUT",
     "body": formData
   });
 
