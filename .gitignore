@@ -1,3 +1,4 @@
+BatchFiles/.DONT
 server/uploads
 
 server/node_modules/.package-lock.json
